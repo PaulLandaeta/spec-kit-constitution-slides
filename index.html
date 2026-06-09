@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to Write a Constitution · Spec Kit</title>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- 1. Cover -->
+        <section data-auto-animate>
+          <span class="chip">Spec-Driven Development</span>
+          <h1>How to Write a <strong>Constitution</strong></h1>
+          <h2 class="subtitle">The laws of your project with GitHub Spec&nbsp;Kit</h2>
+          <p class="muted small" style="margin-top: 1.2em">
+            What goes in <code>constitution.md</code> · what moves to auxiliary files ·
+            ready-to-adapt examples
+          </p>
+          <aside class="notes">
+            We'll learn to write a constitution: non-negotiable principles, what does NOT
+            belong there, and how to organize the rest (tech-stack, guidelines, ADRs).
+          </aside>
+        </section>
+
+        <!-- 2. What is Spec Kit / SDD? -->
+        <section>
+          <span class="chip">Context</span>
+          <h2>What is Spec-Driven Development?</h2>
+          <div class="cols">
+            <div class="panel">
+              <h3>The idea</h3>
+              <p>Specifications <strong>don't serve the code</strong>.</p>
+              <p>The <strong>code serves the specification</strong>.</p>
+            </div>
+            <div class="panel">
+              <h3>The shift</h3>
+              <p class="small">From <em>"make the agent write code faster"</em>…</p>
+              <p class="small">…to <em>"make the agent participate in engineering reliably"</em>: process, artifacts and constraints.</p>
+            </div>
+          </div>
+          <p class="muted small" style="margin-top: 0.8em">
+            <strong>Spec Kit</strong> is GitHub's open-source toolkit for SDD: the
+            <code>specify</code> CLI, templates and commands for your agent.
+          </p>
+          <aside class="notes">
+            Spec Kit organizes the agent's work around structured artifacts. The constitution
+            is the first and most important: the "architectural DNA".
+          </aside>
+        </section>
+
+        <!-- 3. The hierarchy -->
+        <section>
+          <span class="chip">Hierarchy</span>
+          <h2>Where the constitution fits</h2>
+          <div class="flow">
+            <div class="node top">Constitution</div>
+            <div class="arrow">↓</div>
+            <div class="node">Technical Standards</div>
+            <div class="arrow">↓</div>
+            <div class="node">Architecture Decisions (ADR)</div>
+            <div class="arrow">↓</div>
+            <div class="node">Specifications</div>
+            <div class="arrow">↓</div>
+            <div class="node">Tasks</div>
+          </div>
+          <p class="muted small center">
+            Top: what almost never changes. Bottom: the concrete and executable.
+          </p>
+        </section>
+
+        <!-- 4. What is the constitution? -->
+        <section>
+          <span class="chip">Definition</span>
+          <h2>The constitution</h2>
+          <ul>
+            <li>The project's <strong>non-negotiable rules</strong>.</li>
+            <li>Lives in <code>.specify/memory/constitution.md</code>.</li>
+            <li>Specs, plans and tasks must <strong>align</strong> with it.</li>
+            <li>It is <strong>small</strong>: verifiable principles, not implementation instructions.</li>
+          </ul>
+          <div class="panel" style="margin-top: 0.7em">
+            <p class="small muted">Golden rule</p>
+            <p>The constitution states <strong>what must always hold</strong>, not <strong>which technology</strong> to use.</p>
+          </div>
+          <aside class="notes">
+            The most common mistake is to dump everything here. A large constitution stops
+            being law and becomes a manual nobody follows.
+          </aside>
+        </section>
+
+        <!-- 5. What DOES go -->
+        <section>
+          <span class="chip">Content</span>
+          <h2>What <strong>DOES</strong> go in the constitution</h2>
+          <div class="cols">
+            <div class="panel good">
+              <h3>Verifiable principles</h3>
+              <ul>
+                <li>Contract-First Development</li>
+                <li>Separation of Concerns</li>
+                <li>Traceability</li>
+                <li>Testability</li>
+              </ul>
+            </div>
+            <div class="panel good">
+              <h3>Boundaries and rules</h3>
+              <ul>
+                <li>Security by Design</li>
+                <li>Explicit Error Handling</li>
+                <li>No Hidden Behavior</li>
+              </ul>
+            </div>
+          </div>
+          <p class="muted small" style="margin-top: 0.7em">
+            Each one is a <strong>verifiable law</strong>: you can check whether a spec or a PR honors it.
+          </p>
+        </section>
+
+        <!-- 5b. Example principle -->
+        <section>
+          <span class="chip">Example principle</span>
+          <h3>Contract-First Development</h3>
+          <pre data-id="code"><code class="language-markdown" data-trim data-line-numbers># Project Constitution
+
+## 1. Contract-First Development
+
+Every public feature must be defined first by a verifiable
+contract before it is implemented.
+
+A contract may be:
+- OpenAPI for REST endpoints.
+- JSON Schema for data structures.
+- Gherkin for acceptance criteria.
+- Type definitions for internal interfaces.
+- Preconditions and postconditions for business rules.
+
+No endpoint, critical component or business rule may be
+implemented without a prior contract.</code></pre>
+        </section>
+
+        <!-- 6. What does NOT go -->
+        <section>
+          <span class="chip">Content</span>
+          <h2>What does <strong>NOT</strong> go in the constitution</h2>
+          <div class="cols">
+            <div class="panel bad">
+              <h3>Concrete technology</h3>
+              <ul>
+                <li>Use React</li>
+                <li>Use Node.js</li>
+                <li>Use MongoDB / PostgreSQL</li>
+                <li>Use Tailwind</li>
+              </ul>
+            </div>
+            <div class="panel bad">
+              <h3>Code conventions</h3>
+              <ul>
+                <li>Components in PascalCase</li>
+                <li>Use Zustand</li>
+                <li>Use Express</li>
+              </ul>
+            </div>
+          </div>
+          <p class="muted small" style="margin-top: 0.7em">
+            All of this belongs in <strong>auxiliary files</strong> → <code>tech-stack.md</code>, guidelines, ADRs.
+          </p>
+          <aside class="notes">
+            If tomorrow you migrate from React to Angular, you should not touch the
+            constitution. That's the sign the decision was at the right level.
+          </aside>
+        </section>
+
+        <!-- 7. Recommended structure -->
+        <section>
+          <span class="chip">Organization</span>
+          <h2>Recommended <code>.specify/</code> structure</h2>
+<div class="tree">.specify/
+│
+├── memory/
+│   ├── <span class="c">constitution.md</span>          <span class="note"># Project base laws</span>
+│   ├── frontend-guidelines.md  <span class="note"># UI, components, state</span>
+│   ├── backend-guidelines.md   <span class="note"># APIs, services, data</span>
+│   ├── api-contracts.md        <span class="note"># Endpoint contracts</span>
+│   ├── testing-guidelines.md   <span class="note"># Testing strategy</span>
+│   └── security-guidelines.md  <span class="note"># Cross-cutting security</span>
+│
+├── <span class="c">tech-stack.md</span>                <span class="note"># React, Node, PostgreSQL…</span>
+│
+└── adr/
+    ├── adr-001-react.md
+    ├── adr-002-nodejs.md
+    └── adr-003-postgresql.md</div>
+          <aside class="notes">
+            Small constitution + specialized files the agent can consult.
+          </aside>
+        </section>
+
+        <!-- 8. Auxiliary files (vertical) -->
+        <section>
+          <section>
+            <span class="chip">Auxiliary files</span>
+            <h2>How we apply the laws per layer</h2>
+            <table>
+              <thead>
+                <tr><th>File</th><th>Responsibility</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>constitution.md</code></td><td>Laws that never change</td></tr>
+                <tr><td><code>guidelines.md</code></td><td>How we apply those laws per layer</td></tr>
+                <tr><td><code>contracts.md</code></td><td>Verifiable agreements between parties</td></tr>
+                <tr><td><code>spec.md</code></td><td>What a concrete feature asks for</td></tr>
+                <tr><td><code>tasks.md</code></td><td>Executable work</td></tr>
+              </tbody>
+            </table>
+            <p class="muted small">↓ Go down for an example of each</p>
+          </section>
+
+          <section>
+            <span class="chip">frontend-guidelines.md</span>
+            <h3>Component Contract</h3>
+            <pre><code class="language-markdown" data-trim># Frontend Guidelines
+
+## Component Contract
+
+Every reusable component must declare:
+- Props
+- Possible states
+- Emitted events
+- Error / loading / empty cases
+
+Component: UserCard
+
+Props:
+- user: UserSummary
+- onSelect?: (userId: string) => void
+- variant?: "compact" | "detailed"
+
+States:
+- default
+- loading
+- empty
+- error</code></pre>
+          </section>
+
+          <section>
+            <span class="chip">api-contracts.md</span>
+            <h3>Endpoint Contract</h3>
+            <pre><code class="language-markdown" data-trim>POST /users
+
+Authentication: Required.
+Authorization:  Only admin users.
+
+Request Body:
+{ "name": "string", "email": "string" }
+
+Success Response:
+201 Created
+
+Error Responses:
+400 Validation error
+401 Unauthenticated
+403 Unauthorized
+409 Email already exists
+
+Business Rules:
+- Email must be unique.
+- Name cannot be empty.</code></pre>
+          </section>
+
+          <section>
+            <span class="chip">backend-guidelines.md</span>
+            <h3>Service Contract</h3>
+            <pre><code class="language-markdown" data-trim>Use Case: CreateUser
+
+Preconditions:
+- Email format is valid.
+- Email does not already exist.
+
+Postconditions:
+- User is persisted.
+- UserCreated event is emitted.
+- Audit log is created.
+
+Domain Errors:
+- InvalidEmail
+- EmailAlreadyExists</code></pre>
+          </section>
+        </section>
+
+        <!-- 9. Where do React/Node go? -->
+        <section>
+          <section>
+            <span class="chip">The key question</span>
+            <h2>Where do React and Node.js go?</h2>
+            <p>At a level <strong>below</strong> the constitution. Two options:</p>
+            <div class="cols">
+              <div class="panel">
+                <h3>Option 1 · tech-stack.md</h3>
+                <p class="small">The most practical. A list of approved technologies.</p>
+              </div>
+              <div class="panel">
+                <h3>Option 2 · ADR</h3>
+                <p class="small">More professional. A documented decision with context and consequences.</p>
+              </div>
+            </div>
+            <p class="muted small">↓ Go down to see both</p>
+          </section>
+
+          <section>
+            <span class="chip">Option 1</span>
+            <h3>tech-stack.md</h3>
+            <pre><code class="language-markdown" data-trim># Technology Stack
+
+## Frontend
+- React
+- TypeScript
+- Vite
+
+## Backend
+- Node.js
+- NestJS
+
+## Database
+- PostgreSQL
+
+## API
+- OpenAPI</code></pre>
+            <p class="muted small">And the constitution only says: <em>"Every implementation must use technologies approved by the Technology Stack."</em> It never mentions React directly.</p>
+          </section>
+
+          <section>
+            <span class="chip">Option 2</span>
+            <h3>adr-001-react.md</h3>
+            <pre><code class="language-markdown" data-trim># ADR-001
+
+Title:   React as Frontend Framework
+Status:  Accepted
+
+Context:
+A modern SPA is required.
+
+Decision:
+React will be the primary framework.
+
+Consequences:
+- Large ecosystem
+- Moderate learning curve
+- Easy TypeScript integration</code></pre>
+            <p class="muted small">It lets you <strong>change decisions without touching the constitution</strong>.</p>
+          </section>
+        </section>
+
+        <!-- 10. Mnemonic rule -->
+        <section>
+          <span class="chip">Simple rule</span>
+          <h2>So you don't get confused</h2>
+          <div class="cols-3">
+            <div class="panel"><h3>constitution</h3><p class="small">laws that never change</p></div>
+            <div class="panel"><h3>guidelines</h3><p class="small">how we apply those laws per layer</p></div>
+            <div class="panel"><h3>contracts</h3><p class="small">verifiable agreements between parties</p></div>
+            <div class="panel"><h3>spec</h3><p class="small">what a concrete feature asks for</p></div>
+            <div class="panel"><h3>tasks</h3><p class="small">executable work</p></div>
+            <div class="panel bad"><h3>the common mistake</h3><p class="small">dumping <strong>everything</strong> into the constitution</p></div>
+          </div>
+        </section>
+
+        <!-- 11. Real case -->
+        <section>
+          <span class="chip">Real case</span>
+          <h2>Constitution for a <strong>World Cup prediction pool</strong></h2>
+          <p class="small">A World Cup prediction (betting pool) app. What matters most to protect?</p>
+          <div class="cols">
+            <div class="panel">
+              <ul class="small">
+                <li><strong>Fairness</strong> — nobody predicts late or tampers</li>
+                <li><strong>Locking</strong> — prediction immutable after the deadline</li>
+                <li><strong>Reproducible scoring</strong> — you know why you got those points</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <ul class="small">
+                <li><strong>Deterministic ranking</strong> — same facts, same leaderboard</li>
+                <li><strong>Auditability</strong> — every critical action leaves a trace</li>
+                <li><strong>Traceability</strong> — requirement → … → code</li>
+              </ul>
+            </div>
+          </div>
+          <p class="muted small">React, Node, PostgreSQL, Redis → go in <code>tech-stack.md</code>, not here.</p>
+        </section>
+
+        <!-- 12. Principles 1-6 -->
+        <section>
+          <span class="chip">World Cup Pool · 1–6</span>
+          <h2>Foundational principles</h2>
+          <div class="cols small">
+            <div>
+              <p><strong>1. Contract-First</strong> — nothing is built without a contract.</p>
+              <p><strong>2. Traceability</strong> — Requirement → Spec → Contract → Task → Test → Code.</p>
+              <p><strong>3. Domain Integrity</strong> — the domain doesn't depend on frameworks or DB.</p>
+            </div>
+            <div>
+              <p><strong>4. Prediction Immutability</strong> — the prediction freezes after the deadline.</p>
+              <p><strong>5. Transparent Scoring</strong> — no hidden scoring logic.</p>
+              <p><strong>6. Fairness &amp; Anti-Fraud</strong> — no late predictions or tampering.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 13. Principles 7-12 -->
+        <section>
+          <span class="chip">World Cup Pool · 7–12</span>
+          <h2>Security, time and testing</h2>
+          <div class="cols small">
+            <div>
+              <p><strong>7. Auditability</strong> — actor, action, timestamp, previous/new state.</p>
+              <p><strong>8. Explicit Time Handling</strong> — explicit time zones, no ambiguity.</p>
+              <p><strong>9. Error Handling by Contract</strong> — every expected error, declared.</p>
+            </div>
+            <div>
+              <p><strong>10. Security by Design</strong> — validate input, secrets out of the code.</p>
+              <p><strong>11. Privacy &amp; Data Minimization</strong> — only the necessary data.</p>
+              <p><strong>12. Testability</strong> — every business rule has tests.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 14. Principles 13-18 -->
+        <section>
+          <span class="chip">World Cup Pool · 13–18</span>
+          <h2>Determinism and governance</h2>
+          <div class="cols small">
+            <div>
+              <p><strong>13. Deterministic Ranking</strong> — same facts, same leaderboard.</p>
+              <p><strong>14. Administrative Accountability</strong> — auditable admins, no silent changes.</p>
+              <p><strong>15. Separation of Concerns</strong> — no business rules in UI/controllers/DB.</p>
+            </div>
+            <div>
+              <p><strong>16. Recoverability</strong> — scores recalculable from the facts.</p>
+              <p><strong>17. Observability</strong> — logs/metrics/traces for what's critical.</p>
+              <p><strong>18. Specification Governance</strong> — on conflict, the constitution wins.</p>
+            </div>
+          </div>
+          <p class="muted small center">📄 All 18 in full: <code>examples/.specify/memory/constitution.md</code></p>
+        </section>
+
+        <!-- 15. How it's generated in practice -->
+        <section>
+          <span class="chip">In practice</span>
+          <h2>The Spec Kit flow</h2>
+          <pre><code class="language-bash" data-trim># 1. Initialize the project with your agent
+specify init my-world-cup-pool</code></pre>
+          <p class="small">Then, inside the agent, the slash commands generate the artifacts:</p>
+          <div class="pipeline">
+            <span class="step">/speckit.constitution</span><span class="sep">→</span>
+            <span class="step">/speckit.specify</span><span class="sep">→</span>
+            <span class="step">/speckit.plan</span><span class="sep">→</span>
+            <span class="step">/speckit.tasks</span><span class="sep">→</span>
+            <span class="step">/speckit.implement</span>
+          </div>
+          <p class="muted small" style="margin-top: 0.9em">
+            <code>/speckit.constitution</code> creates/updates <code>.specify/memory/constitution.md</code>.
+            Everything else is built aligned with it.
+          </p>
+          <aside class="notes">
+            Order matters: first the laws, then the feature spec, the technical plan, the
+            tasks, and finally the implementation.
+          </aside>
+        </section>
+
+        <!-- 16. Bibliography -->
+        <section>
+          <span class="chip">Bibliography</span>
+          <h2>References</h2>
+          <ul class="refs">
+            <li>GitHub Spec Kit — official repository:<br /><a href="https://github.com/github/spec-kit">github.com/github/spec-kit</a></li>
+            <li>Spec-Driven Development (repo doc):<br /><a href="https://github.com/github/spec-kit/blob/main/spec-driven.md">github.com/github/spec-kit/blob/main/spec-driven.md</a></li>
+            <li>Quick Start Guide:<br /><a href="https://github.github.com/spec-kit/quickstart.html">github.github.com/spec-kit/quickstart.html</a></li>
+            <li>Den Delimarsky — "What's The Deal With GitHub Spec Kit":<br /><a href="https://den.dev/blog/github-spec-kit/">den.dev/blog/github-spec-kit</a></li>
+            <li>Microsoft for Developers — "Diving Into SDD With Spec Kit":<br /><a href="https://developer.microsoft.com/blog/spec-driven-development-spec-kit">developer.microsoft.com/blog/spec-driven-development-spec-kit</a></li>
+            <li>Reveal.js (this deck's tool):<br /><a href="https://revealjs.com">revealjs.com</a></li>
+          </ul>
+        </section>
+
+        <!-- 17. Closing -->
+        <section data-auto-animate>
+          <span class="chip">In one sentence</span>
+          <h1><strong>Small</strong> constitution +<br />specialized files</h1>
+          <p class="muted">that the agent can consult.</p>
+          <p class="small" style="margin-top: 1em">
+            Laws that protect what matters. Technology that can change without touching them.
+          </p>
+        </section>
+
+      </div>
+    </div>
+
+    <div class="slide-footer">Constitution · Spec-Driven Development with GitHub Spec Kit</div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
