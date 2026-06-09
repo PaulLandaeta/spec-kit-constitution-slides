@@ -3,14 +3,15 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Slides: cómo se crea la Constitution para Spec-Driven Development con GitHub Spec Kit",
+  "description": "Slides: how to write a Constitution for Spec-Driven Development with GitHub Spec Kit",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "reveal.js": "^5.1.0"
+    "reveal.js": "^5.1.0",
+    "reveal.js-menu": "^2.1.0"
   },
   "devDependencies": {
     "vite": "^5.4.0"
