@@ -168,6 +168,37 @@
           </aside>
         </section>
 
+        <!-- 6b. How the files connect -->
+        <section data-menu-title="How the files connect">
+          <span class="chip">How they relate</span>
+          <h2>One law, applied by layer</h2>
+          <p class="small">The guideline files don't repeat the law — they say <strong>how to apply it</strong>. Follow <em>Contract-First</em> down:</p>
+          <div class="chain">
+            <span class="link first fragment glow">constitution.md<br /><span class="muted small">the law</span></span>
+            <span class="to fragment">→</span>
+            <span class="link fragment glow">guidelines.md<br /><span class="muted small">how per layer</span></span>
+            <span class="to fragment">→</span>
+            <span class="link fragment glow">contracts<br /><span class="muted small">made verifiable</span></span>
+            <span class="to fragment">→</span>
+            <span class="link last fragment glow">tech-stack.md<br /><span class="muted small">with what</span></span>
+          </div>
+          <table class="fragment" style="margin-top: 0.8em">
+            <tbody>
+              <tr><td><code>constitution.md</code></td><td>Every feature needs a contract <em>before</em> code</td></tr>
+              <tr><td><code>frontend-guidelines.md</code></td><td>Component Contract — props, states, error/empty</td></tr>
+              <tr><td><code>api-contracts.md</code></td><td>Endpoint Contract — <code>POST /users</code>, 400 / 409…</td></tr>
+              <tr><td><code>backend-guidelines.md</code></td><td>Service Contract — pre / postconditions, domain errors</td></tr>
+              <tr><td><code>tech-stack.md</code></td><td>Written in OpenAPI 3.1</td></tr>
+            </tbody>
+          </table>
+          <aside class="notes">
+            One abstract law, three concrete "how"s by layer, then the tooling. Each guideline's
+            header literally says "how we apply the constitution's laws in the X layer." The test:
+            migrating React→Angular touches tech-stack.md and a guideline — the constitution stays
+            intact. That's proof the separation is right.
+          </aside>
+        </section>
+
         <!-- 7. Where React/Node go -->
         <section data-menu-title="Where do React/Node go?">
           <span class="chip">The key question</span>
